@@ -1,8 +1,9 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const path = require('path')
 
-const mode = process.env.NODE_ENV === 'development' ? 'development': 'production'
+const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
 module.exports = {
     entry: path.join(__dirname, 'src/index.js'),
@@ -23,16 +24,22 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
             },
             {
-                test: /\.m?js$/,
+                test: /\.less$/,
+                use: [
+                    MiniCssExtractPlugin.loader, "css-loader", "less-loader"
+                ],
+            },
+            {
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                }
+                },
             },
             {
                 test: /\.(png|gif)/,
                 type: 'asset/resource'
-              }
+            },
         ]
     },
     devtool: 'source-map',
@@ -43,6 +50,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'main.[hash].css'
         }),
-],
+    ],
+    resolve: {
+        extensions: [".js", ".jsx", ".json"],
+        mainFiles: ["index"],
+    },
     mode: mode
 }

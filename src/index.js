@@ -1,7 +1,10 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Home from './home'
 import './index.css'
 
-console.log('hello webpack');
-var content = document.createElement('h1')
-content.appendChild(document.createTextNode('hello webpack'))
-console.log(content);
-document.body.insertBefore(content, document.getElementById('app'))
+
+ReactDOM.render(
+    <Home />,
+    document.getElementById('app')
+)

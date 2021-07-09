@@ -1,8 +1,5 @@
-h1 {
-    background-color: azure;
-}
-#img {
-    background-image: url('../public/download.gif');
-    height: 226px;
-    width: 500px;
+#asd {
+    height: 50px;
+    width: 50px;
+    background-color: aqua;
 }
