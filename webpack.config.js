@@ -1,6 +1,5 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const path = require('path')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
@@ -40,6 +39,26 @@ module.exports = {
                 test: /\.(png|gif)/,
                 type: 'asset/resource'
             },
+            {
+                test: /\.svg/,
+                use: ['file-loader']
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                include: path.resolve(__dirname, './node_modules/bootstrap-icons/font/fonts'),
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'webfonts',
+                        publicPath: '../webfonts',
+                    },
+                }
+            }
         ]
     },
     devtool: 'source-map',
@@ -52,7 +71,7 @@ module.exports = {
         }),
     ],
     resolve: {
-        extensions: [".js", ".jsx", ".json"],
+        extensions: [".js", ".jsx", ".json, tsx, ts"],
         mainFiles: ["index"],
     },
     mode: mode
