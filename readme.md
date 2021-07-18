@@ -6,3 +6,6 @@ This landing page is my personal website to introduce myself.
 - Webpack 5
 - React
 - animate.css
+
+## Todo
+- push it on AWS/Azure/GCP
